@@ -1,0 +1,45 @@
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+  <Obj RefId="0">
+    <TN RefId="0">
+      <T>survival_place</T>
+      <T>System.Object</T>
+    </TN>
+    <ToString>survival_place</ToString>
+    <Props>
+      <Obj N="placecoordinate" RefId="1">
+        <TN RefId="1">
+          <T>placecoordinate</T>
+          <T>System.Object</T>
+        </TN>
+        <ToString>placecoordinate</ToString>
+        <Props>
+          <I32 N="x">-69</I32>
+          <I32 N="y">47</I32>
+          <I32 N="z">-292</I32>
+        </Props>
+      </Obj>
+      <Obj N="dimention" RefId="2">
+        <TN RefId="2">
+          <T>dimention</T>
+          <T>System.Enum</T>
+          <T>System.ValueType</T>
+          <T>System.Object</T>
+        </TN>
+        <ToString>nether</ToString>
+        <I32>0</I32>
+      </Obj>
+      <Obj N="type" RefId="3">
+        <TN RefId="3">
+          <T>place_type</T>
+          <T>System.Enum</T>
+          <T>System.ValueType</T>
+          <T>System.Object</T>
+        </TN>
+        <ToString>nether_portal</ToString>
+        <I32>38</I32>
+      </Obj>
+      <I32 N="id">1</I32>
+    </Props>
+  </Obj>
+  <Nil />
+</Objs>
