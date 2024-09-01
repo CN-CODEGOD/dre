@@ -59,7 +59,7 @@ function shortcut  {
         
         
     $name =$newpath.name
-    $Destination ="C:\Users\Administrator\Favorites\$name.lnk"
+    $Destination ="C:\Users\34683\Favorites\$name.lnk"
 
     
     
@@ -95,9 +95,10 @@ function shortcut  {
                     $title
                 }
                 try {
-                    $title = node "C:\Users\Administrator\dre\dre\GETtitle.js" $url
+                    $title = node "C:\Users\34683\dre\dre\GETtitle.js" $url
                     $title=$title[1]  
-                $Destination = "C:\Users\Administrator\favorites\$title.lnk"
+                    $title
+                $Destination = "C:\Users\34683\favorites\$title.lnk"
         
                 $sourcepath =$url 
     
@@ -115,7 +116,7 @@ function shortcut  {
                 catch {
                   $title = get-title
                   
-                  $Destination = "C:\Users\Administrator\favorites\$title.lnk"
+                  $Destination = "C:\Users\34683\favorites\$title.lnk"
         
                   $sourcepath =$url 
       
@@ -146,6 +147,8 @@ switch ([type]::get_type($inputwtk)) {
 
 
 
+
+
 function dre-wallpaper {
 
 [CmdletBinding()]
@@ -154,16 +157,24 @@ param (
 [string]
 $path 
 
-
-
 )
+function get-title {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory)]
+        [string]
+        $title
+    )
+            $title
+        }
+$title = (Get-Item $path).basename
 
-$newpath= Get-ChildItem $path
-$name = $newpath.name
+if ($title -eq $null) {
+    $title = get-title 
+}
+$Destination ="$home\desktop\$title.lnk"
 
-$Destination ="c:\Users\Administrator\Favorites\$name.lnk"
-
-$sourcepath =  "D:\Program Files\steam\steamapps\common\wallpaper_engine\wallpaper64.exe"
+$sourcepath = "f:\games\steam\steamapps\common\wallpaper_engine\wallpaper64.exe"
 
 
 $WshShell = New-Object -comObject WScript.Shell
@@ -182,7 +193,7 @@ $Shortcut.save()
 
 
 
-
+<#【云】上传文件笔记#>
 function dre-note {
 [CmdletBinding()]
 param (
@@ -198,7 +209,7 @@ $note
 
 }
 
-
+<#【云】上传文件云端#>
 function dre-share {
 [CmdletBinding()]
 param (
@@ -225,9 +236,9 @@ function dre-text {
      $message
  )
     
- $path  = "C:\Users\Administrator\share"
+ $path  = "C:\Users\34683\share"
  for (($id=0),($for=$true);$for;) {
-     if (test-path "C:\Users\Administrator\share\history\txt\history($id).txt") {
+     if (test-path "C:\Users\34683\share\history\txt\history($id).txt") {
       
      $id++
     
@@ -247,8 +258,8 @@ function dre-text {
 
 
   
-New-Item  "C:\Users\Administrator\share\.newtxt.txt"
-Add-Content "C:\Users\Administrator\share\.newtxt.txt"  $message 
+New-Item  "C:\Users\34683\share\.newtxt.txt"
+Add-Content "C:\Users\34683\share\.newtxt.txt"  $message 
 
 }
 function dre-share {
@@ -266,7 +277,7 @@ if (Test-Path $path)
     if ($path -like "*.png") {
 
         for (($id=0),($for=$true);$for;) {
-            if (test-path "C:\Users\Administrator\share\history\pic\history($id).png") {
+            if (test-path "C:\Users\34683\share\history\pic\history($id).png") {
              
             $id++
            
@@ -278,7 +289,7 @@ if (Test-Path $path)
       
     
             try {
-                Move-Item C:\Users\Administrator\share\.newpic.png C:\Users\Administrator\share\history\pic\$name
+                Move-Item C:\Users\34683\share\.newpic.png C:\Users\34683\share\history\pic\$name
             }
             catch {
                
@@ -295,12 +306,12 @@ if (Test-Path $path)
            
            }
     
-           Move-Item $path C:\Users\Administrator\share\.newpic.png
+           Move-Item $path C:\Users\34683\share\.newpic.png
      }   
 
      elseif ($path -like "*.jpg") {
         for (($id=0),($for=$true);$for;) {
-            if (test-path "C:\Users\Administrator\share\history\pic\history($id).png") {
+            if (test-path "C:\Users\34683\share\history\pic\history($id).png") {
              
             $id++
            
@@ -309,15 +320,15 @@ if (Test-Path $path)
             $for = $false   
             $id
             $name =  "history($id).png"
-      Move-Item C:\Users\Administrator\share\.newpic.png C:\Users\Administrator\share\history\pic\$name
+      Move-Item C:\Users\34683\share\.newpic.png C:\Users\34683\share\history\pic\$name
             }
            }
-        Move-Item $path C:\Users\Administrator\share\.newpic.png
+        Move-Item $path C:\Users\34683\share\.newpic.png
         
         
     } Else {
     
-    Move-Item $path C:\Users\Administrator\share\
+    Move-Item $path C:\Users\34683\share\
     
     
     }

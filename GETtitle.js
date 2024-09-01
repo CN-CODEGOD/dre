@@ -23,7 +23,7 @@ argv.forEach((args) => {
     }
     var url = process.argv.slice(2);
     
-    runExec(`"POWERSHELL" C:\\Users\\Administrator\\dre\\dre\\crawl1.ps1 ${url}`).then(res => {
+    runExec(`"POWERSHELL" C:\\Users\\34683\\dre\\dre\\crawl1.ps1 ${url}`).then(res => {
     
     
     
