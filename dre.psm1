@@ -59,7 +59,7 @@ function shortcut  {
         
         
     $name =$newpath.name
-    $Destination ="C:\Users\34683\Favorites\$name.lnk"
+    $Destination ="$home\Favorites\$name.lnk"
 
     
     
@@ -95,10 +95,10 @@ function shortcut  {
                     $title
                 }
                 try {
-                    $title = node "C:\Users\34683\dre\dre\GETtitle.js" $url
+                    $title = node "$home\dre\dre\GETtitle.js" $url
                     $title=$title[1]  
                     $title
-                $Destination = "C:\Users\34683\favorites\$title.lnk"
+                $Destination = "$home\$title.lnk"
         
                 $sourcepath =$url 
     
@@ -116,7 +116,7 @@ function shortcut  {
                 catch {
                   $title = get-title
                   
-                  $Destination = "C:\Users\34683\favorites\$title.lnk"
+                  $Destination = "$home\favorites\$title.lnk"
         
                   $sourcepath =$url 
       
@@ -236,9 +236,9 @@ function dre-text {
      $message
  )
     
- $path  = "C:\Users\34683\share"
+ $path  = "$home\share"
  for (($id=0),($for=$true);$for;) {
-     if (test-path "C:\Users\34683\share\history\txt\history($id).txt") {
+     if (test-path "$home\share\history\txt\history($id).txt") {
       
      $id++
     
@@ -258,8 +258,8 @@ function dre-text {
 
 
   
-New-Item  "C:\Users\34683\share\.newtxt.txt"
-Add-Content "C:\Users\34683\share\.newtxt.txt"  $message 
+New-Item  "$home\share\.newtxt.txt"
+Add-Content "$home\share\.newtxt.txt"  $message 
 
 }
 function dre-share {
@@ -277,7 +277,7 @@ if (Test-Path $path)
     if ($path -like "*.png") {
 
         for (($id=0),($for=$true);$for;) {
-            if (test-path "C:\Users\34683\share\history\pic\history($id).png") {
+            if (test-path "$home\share\history\pic\history($id).png") {
              
             $id++
            
@@ -289,7 +289,7 @@ if (Test-Path $path)
       
     
             try {
-                Move-Item C:\Users\34683\share\.newpic.png C:\Users\34683\share\history\pic\$name
+                Move-Item $home\share\.newpic.png $home\share\history\pic\$name
             }
             catch {
                
@@ -306,12 +306,12 @@ if (Test-Path $path)
            
            }
     
-           Move-Item $path C:\Users\34683\share\.newpic.png
+           Move-Item $path $home\share\.newpic.png
      }   
 
      elseif ($path -like "*.jpg") {
         for (($id=0),($for=$true);$for;) {
-            if (test-path "C:\Users\34683\share\history\pic\history($id).png") {
+            if (test-path "$home\share\history\pic\history($id).png") {
              
             $id++
            
@@ -320,15 +320,15 @@ if (Test-Path $path)
             $for = $false   
             $id
             $name =  "history($id).png"
-      Move-Item C:\Users\34683\share\.newpic.png C:\Users\34683\share\history\pic\$name
+      Move-Item $home\share\.newpic.png $home\share\history\pic\$name
             }
            }
-        Move-Item $path C:\Users\34683\share\.newpic.png
+        Move-Item $path $home\share\.newpic.png
         
         
     } Else {
     
-    Move-Item $path C:\Users\34683\share\
+    Move-Item $path $home\share\
     
     
     }
