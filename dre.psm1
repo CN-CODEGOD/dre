@@ -22,6 +22,7 @@ return "url"
         }
 
    elseif ($inputwtk -like "http://*"
+
    )
    {
 
@@ -95,10 +96,10 @@ function shortcut  {
                     $title
                 }
                 try {
-                    $title = node "$home\dre\dre\GETtitle.js" $url
-                    $title=$title[1]  
+                    $title = node "$PSScriptRoot\GETtitle.js" $url
+                   
                     $title
-                $Destination = "$home\$title.lnk"
+                $Destination = "$home\onedrive\links\$title.lnk"
         
                 $sourcepath =$url 
     
@@ -107,7 +108,7 @@ function shortcut  {
                 
                 $Shortcut = $WshShell.CreateShortcut("$Destination")
                 
-                $Shortcut.TargetPath = "$sourcepath"
+                $Shortcut.TargetPath = $sourcepath
                 
                 $Shortcut.save()
                 
@@ -116,7 +117,7 @@ function shortcut  {
                 catch {
                   $title = get-title
                   
-                  $Destination = "$home\favorites\$title.lnk"
+                  $Destination = "$home\onedrive\LINKS\$title.lnk"
         
                   $sourcepath =$url 
       
@@ -125,7 +126,7 @@ function shortcut  {
                   
                   $Shortcut = $WshShell.CreateShortcut("$Destination")
                   
-                  $Shortcut.TargetPath = "$sourcepath"
+                  $Shortcut.TargetPath = $sourcepath
                   
                   $Shortcut.save()
                   

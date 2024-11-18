@@ -4,6 +4,6 @@ param (
     [string]
     $url
 )
-$content = curl $url
+$content = Invoke-WebRequest $url
 
 $content.RawContent   
