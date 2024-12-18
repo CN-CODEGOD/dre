@@ -1,200 +1,110 @@
 
 
-function dre-add  {
+function dre-add {
 [CmdletBinding()]
 param (
     [Parameter()]
     [string]
-    $inputwtk
+    $block
+
 )
 
-class type {
-    [string]$inputwtk
 
 
-    static [string] get_type([string]$inputwtk) {
-
-        if ($inputwtk -like "https://*") {
-            
-return "url"
-
-
-        }
-
-   elseif ($inputwtk -like "http://*"
-
-   )
-   {
-
-    return "url"
-   }
-
-
-   else {
-
-    return "shortcut"
-   }
-   
-
-
-    }
-
-    
-}
-
-function shortcut  {
- [CmdletBinding()]
- param (
-     [Parameter(mandatory)]
-     [string]
-     $path
-   
+    function add-url {
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [string]
+        $url
     )
-    
-    
-    
-    
-    
-        
-    $newpath= Get-Item $path
-        
-        
-    $name =$newpath.name
-    $Destination ="$home\Favorites\$name.lnk"
-
-    
-    
-    
-    $WshShell = New-Object -comObject WScript.Shell
-    
-    $Shortcut = $WshShell.CreateShortcut("$Destination")
-    
-    $Shortcut.TargetPath = $path 
-    
-    $Shortcut.save()
- 
-
-
-    
-}
-
-        function url  {
-            [CmdletBinding()]
-            param ( 
-                [Parameter()]
-                [string]
-                $url
-                )
-
-                function get-title {
-            [CmdletBinding()]
-            param (
-                [Parameter(Mandatory)]
-                [string]
-                $title
-            )
-                    $title
-                }
-                try {
-                    $title = node "$PSScriptRoot\GETtitle.js" $url
-                   
-                    $title
-                $Destination = "$home\onedrive\links\$title.lnk"
-        
-                $sourcepath =$url 
-    
-    
-                $WshShell = New-Object -comObject WScript.Shell
-                
-                $Shortcut = $WshShell.CreateShortcut("$Destination")
-                
-                $Shortcut.TargetPath = $sourcepath
-                
-                $Shortcut.save()
-                
-        
-                }
-                catch {
-                  $title = get-title
-                  
-                  $Destination = "$home\onedrive\LINKS\$title.lnk"
-        
-                  $sourcepath =$url 
-      
-      
-                  $WshShell = New-Object -comObject WScript.Shell
-                  
-                  $Shortcut = $WshShell.CreateShortcut("$Destination")
-                  
-                  $Shortcut.TargetPath = $sourcepath
-                  
-                  $Shortcut.save()
-                  
-                }
-     
-            
-
-        }
-
-switch ([type]::get_type($inputwtk)) {
-    url { url -url $inputwtk  }
-    shortcut {shortcut -path $inputwtk}
-}
-
-
-    
-
-}
-
-
-
-
-
-function dre-wallpaper {
-
-[CmdletBinding()]
-param (
-[Parameter()]
-[string]
-$path 
-
-)
-function get-title {
+    function get-title {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
         [string]
         $title
     )
-            $title
-        }
-$title = (Get-Item $path).basename
+        $title 
+    }
+    try {
+        $title = node "$PSScriptRoot\GETtitle.js" $url
+                    
+        $title
+    $Destination = "$home\links\$title.lnk"
 
-if ($title -eq $null) {
-    $title = get-title 
-}
-$Destination ="$home\desktop\$title.lnk"
-
-$sourcepath = "f:\games\steam\steamapps\common\wallpaper_engine\wallpaper64.exe"
-
-
-$WshShell = New-Object -comObject WScript.Shell
-
-$Shortcut = $WshShell.CreateShortcut("$Destination")
-
-$Shortcut.TargetPath = "$sourcepath"
-$Shortcut.Arguments ="-control openWallpaper -file `"$path`""
-$Shortcut.save()
+    $sourcepath =$url 
 
 
+    $WshShell = New-Object -comObject WScript.Shell
 
-}
+    $Shortcut = $WshShell.CreateShortcut("$Destination")
+
+    $Shortcut.TargetPath = $sourcepath
+
+    $Shortcut.save()
+
+    }
+    catch {
+        $title = get-title
+                    
+        $Destination = "$home\LINKS\$title.lnk"
+
+        $sourcepath =$url 
+
+
+        $WshShell = New-Object -comObject WScript.Shell
+        
+        $Shortcut = $WshShell.CreateShortcut("$Destination")
+        
+        $Shortcut.TargetPath = $sourcepath
+        
+        $Shortcut.save()
+        
+    }
+
+    }
+    function add-file {
+        [CmdletBinding()]
+        param (
+            [Parameter()]
+            [string]
+            $filepath
+        )
+           
+        
+       $newpath= Get-Item $filepath
+               
+               
+       $name =$newpath.name
+       $Destination ="$home\Favorites\$name.lnk"
+       
+       
+       
+       
+       $WshShell = New-Object -comObject WScript.Shell
+       
+       $Shortcut = $WshShell.CreateShortcut("$Destination")
+       
+       $Shortcut.TargetPath = $filepath 
+       
+       $Shortcut.save()
+       }
+       if (
+           $block -like "https://*" -or $block -like "http://*"
+       ) {
+           add-url -url $block
+       }
+       else {
+           add-shortcut -filepath $block
+       }
+       
+       }
 
 
 
 
-
-<#【云】上传文件笔记#>
+<#【云】上传件笔记#>
 function dre-note {
 [CmdletBinding()]
 param (
@@ -202,8 +112,27 @@ param (
 [string]
 $note 
 
+
 )
 
+$api_dev_key = 'CB6ywkdkm88krsDsG1AIMuMJQG6o1apS'
+$api_paste_code = $note
+$api_option = 'paste'
+
+$uri = "https://pastebin.com/api/api_post.php"
+
+# Create the body for the POST request
+$body = @{
+    api_dev_key     = $api_dev_key
+    api_paste_code  = $api_paste_code
+    api_option      = $api_option
+}
+
+# Send the POST request
+$response = Invoke-RestMethod -Uri $uri -Method Post -Body $body
+
+# Output the response
+$response
 
 
 
@@ -211,24 +140,9 @@ $note
 }
 
 <#【云】上传文件云端#>
-function dre-share {
-[CmdletBinding()]
-param (
-    [Parameter()]
-    [string]
-    $Path 
+<#
 
-
-)
-try {
-    Move-Item $path $HOME\share 
-}
-catch {
-    Write-Host "error ,incorrect or repeat"
-
-}
-}
-
+## 发送信息到设备
 function dre-text {
  [CmdletBinding()]
  param (
@@ -263,6 +177,9 @@ New-Item  "$home\share\.newtxt.txt"
 Add-Content "$home\share\.newtxt.txt"  $message 
 
 }
+#>
+<#
+发送文件到云端服务器，提供下载，分享
 function dre-share {
 [CmdletBinding()]
 param (
@@ -342,3 +259,5 @@ else {
 }
  
  }
+#>
+
