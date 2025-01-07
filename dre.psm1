@@ -1,10 +1,39 @@
 
+function dre-send {
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [string]
+        $scriptblock
+    )
+
+    
+        wt -w RightShell PowerShell -noexit -c $scriptblock    
+ 
+ 
+       
+        wt -w RightShell cmd /c $scriptblock
+     
+   
+        
+        wt -w RightShell powershell -c node $scriptblock    
+       
+             
+        wt -w RightShell PowerShell -c py $scriptblock    
+            
+        
+    
+
+
+    
+    
+}
 
 function dre-add {
 [CmdletBinding()]
 param (
     [Parameter()]
-    [string]
+    [string]`
     $block
 
 )
@@ -96,25 +125,26 @@ param (
            add-url -url $block
        }
        else {
-           add-shortcut -filepath $block
+           add-file  -filepath $block
        }
        
        }
 
 
 
-
-<#【云】上传件笔记#>
 function dre-note {
 [CmdletBinding()]
 param (
 [Parameter()]
 [string]
 $note 
-
+,
+# Parameter help description
+[Parameter()]
+[string]
+$name="null"
 
 )
-
 $api_dev_key = 'CB6ywkdkm88krsDsG1AIMuMJQG6o1apS'
 $api_paste_code = $note
 $api_option = 'paste'
@@ -133,11 +163,15 @@ $response = Invoke-RestMethod -Uri $uri -Method Post -Body $body
 
 # Output the response
 $response
+Add-Content $response $PSScriptRoot\note.txt
 
 
 
 
 }
+
+<#【云】上传件笔记#>
+
 
 <#【云】上传文件云端#>
 <#
