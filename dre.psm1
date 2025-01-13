@@ -5,14 +5,24 @@ function dre-send {
         [Parameter()]
         [string]
         $scriptblock
+        ,
+        # Parameter help description
+        [Parameter()]
+        [switch]
+        $cmd
     )
 
+    if ($cmd) {
+        wt -w RightShell cmd /c $scriptblock
+    }
     
-        wt -w RightShell PowerShell -noexit -c $scriptblock    
+        else {
+            wt -w RightShell PowerShell -noexit -c $scriptblock    
+        }
  
  
        
-        wt -w RightShell cmd /c $scriptblock
+        
      
    
         
@@ -29,14 +39,28 @@ function dre-send {
     
 }
 
+
+function dre {
+ [CmdletBinding()]
+ param (
+     [Parameter()]
+     [string]
+     $url
+ )
+    
+ yt-dlp.exe $url --config-location $PSScriptRoot\yt-dlp.conf
+}
+
 function dre-add {
 [CmdletBinding()]
 param (
     [Parameter()]
-    [string]`
+    [string]
     $block
 
 )
+
+
 
 
 
