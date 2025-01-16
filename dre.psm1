@@ -13,11 +13,11 @@ function dre-send {
     )
 
     if ($cmd) {
-        wt -w RightShell cmd /c $scriptblock
+        wt -w RightShell --title dre-send  cmd /c $scriptblock
     }
     
         else {
-            wt -w RightShell PowerShell -noexit -c $scriptblock    
+            wt -w RightShell --title dre-send PowerShell -noprofile -noexit -c $scriptblock    
         }
  
  
@@ -26,10 +26,10 @@ function dre-send {
      
    
         
-        wt -w RightShell powershell -c node $scriptblock    
+        wt -w RightShell --title dre-send  cmd /c node $scriptblock    
        
              
-        wt -w RightShell PowerShell -c py $scriptblock    
+        wt -w RightShell --title dre-send  cmd /c  py $scriptblock    
             
         
     
