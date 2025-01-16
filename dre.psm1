@@ -26,10 +26,10 @@ function dre-send {
      
    
         
-        wt -w RightShell --title dre-send  cmd /c node $scriptblock    
+        wt -w RightShell --title dre-send  "C:\Program Files\nodejs\node.exe" $scriptblock    
        
              
-        wt -w RightShell --title dre-send  cmd /c  py $scriptblock    
+        wt -w RightShell --title dre-send  "C:\Users\Adminnistrator\AppData\Local\Programs\Python\Python310\python.exe" $scriptblock    
             
         
     
